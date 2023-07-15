@@ -1,1 +1,12 @@
-{}
+{
+    "hosting": {
+      "public": "dist\\square",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }
+  
