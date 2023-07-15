@@ -1,5 +1,9 @@
 # SOEN 341  
 
+## Hosted website link
+
+https://job-hunting-app-d1b2f.web.app/login
+
 ## Main and Extra Features Video Link 
 
 https://drive.google.com/drive/folders/13UDU8QH6DV63Gm1uEmWqm5k6CUlgSR1H?usp=sharing
