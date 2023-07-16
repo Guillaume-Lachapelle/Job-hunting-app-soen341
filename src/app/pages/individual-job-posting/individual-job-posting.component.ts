@@ -31,6 +31,7 @@ export class IndividualJobPostingComponent {
   Applied: boolean = false;
   favorited: boolean = false;
   Uploading = false;
+  canApply = true;
 
   constructor(
     private Acrouter: ActivatedRoute,
@@ -63,6 +64,13 @@ export class IndividualJobPostingComponent {
           this.favorited = true;
         } else if (!keys.includes(this.posting.get('ID') as any)) {
           this.favorited = false;
+        }
+      });
+      const studentRef = child(dbRef, `students/${id}`);
+      onValue(studentRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data.CV == '' || data.CV == null || data.CV == undefined) {
+          this.canApply = false;
         }
       });
       const starCountRef1 = child(
@@ -170,6 +178,12 @@ export class IndividualJobPostingComponent {
   applyAftermath() {
     const dbRef = ref(this.database);
     if (this.myUser) {
+      if (!this.canApply) {
+        this.storageService.sendNotification(
+          'You need to upload a CV before applying to a job posting'
+        );
+        return;
+      }
       const starCountRef = child(
         dbRef,
         `job-postings/${this.posting.get('ID')}/Candidates`
